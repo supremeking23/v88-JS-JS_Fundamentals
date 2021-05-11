@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta
+			name="viewport"
+			content="width=
+        , initial-scale=1.0"
+		/>
+		<title>Drawing Circles</title>
+
+		<script>
+			function generateRandomRadius(min, max) {
+				return Math.abs(Math.floor(Math.random() * (min - max) + min));
+			}
+		</script>
+	</head>
+	<body>
+		<!-- <p style="position: absolute; top: 150px; left: 75px; width: 200px; height: 200px; border-radius: 100px; background-color: #cce8cc"></p>
+		<p style="position: absolute; top: 230px; left: 275px; width: 150px; height: 150px; border-radius: 70px; background-color: #cce8cc"></p>
+		<p style="position: absolute; top: 100px; left: 475px; width: 180px; height: 180px; border-radius: 90px; background-color: #cce8cc"></p>
+		<br /> -->
+
+		<script>
+			document.addEventListener("DOMContentLoaded", function (event) {
+				let body = document.querySelector("body");
+				document.addEventListener("click", function (e) {
+					// alert(`x ${e.clientX}`);
+					// alert(`y ${e.clientY}`);
+					body.innerHTML += `<p style="position: absolute; top: ${e.clientY - 40}px; left: ${
+						e.clientX - 80
+					}px; width: 200px; height: 200px; border-radius:${generateRandomRadius(10, 200)}px; background-color: #cce8cc"></p>`;
+				});
+			});
+		</script>
+	</body>
+</html>

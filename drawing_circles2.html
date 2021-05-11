@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta
+			name="viewport"
+			content="width=
+        , initial-scale=1.0"
+		/>
+		<title>Drawing Circles</title>
+
+		<style>
+			* {
+				padding: 0;
+				margin: 0;
+			}
+			.btn {
+				padding: 1rem;
+				border: none;
+				margin: 0.2rem;
+				cursor: pointer;
+				/* color: #fff; */
+			}
+
+			.lightgreen {
+				background-color: #cce8cc;
+				border-color: #cce8cc;
+			}
+
+			.lightblue {
+				background-color: lightblue;
+				border-color: lightblue;
+			}
+
+			.lightviolet {
+				background-color: #e5ccff;
+				border-color: #e5ccff;
+			}
+
+			.reset {
+				background-color: #ffbbba;
+				border-color: #ffbbba;
+				float: right;
+			}
+			.canvas {
+				width: 100%;
+				height: 100vh;
+			}
+		</style>
+		<script>
+			function generateRandomRadius(min, max) {
+				return Math.abs(Math.floor(Math.random() * (min - max) + min));
+			}
+		</script>
+	</head>
+	<body>
+		<div class="button-group">
+			<button type="button" class="btn lightgreen">Light Green</button>
+			<button type="button" class="btn lightblue">Light Blue</button>
+			<button type="button" class="btn lightviolet">Light Violet</button>
+			<button type="button" class="btn reset">Reset</button>
+		</div>
+		<!-- <p style="position: absolute; top: 150px; left: 75px; width: 200px; height: 200px; border-radius: 100px; background-color: #cce8cc"></p>
+		<p style="position: absolute; top: 230px; left: 275px; width: 150px; height: 150px; border-radius: 70px; background-color: #cce8cc"></p>
+		<p style="position: absolute; top: 100px; left: 475px; width: 180px; height: 180px; border-radius: 90px; background-color: #cce8cc"></p>
+		<br /> -->
+
+		<!-- <p style="position: absolute; top: 100px; left: 475px; width: 180px; height: 180px; border-radius: 0px; background-color: #cce8cc"></p> -->
+		<div class="canvas"></div>
+		<script>
+			document.addEventListener("DOMContentLoaded", function (event) {
+				let buttons = document.querySelectorAll("button");
+				let canvas = document.querySelector(".canvas");
+				let shapeColor = "#cce8cc";
+				for (let i = 0; i < buttons.length; i++) {
+					// console.log(buttons[i].classList);
+					// if (buttons[i].classList.contains("lightgreen")) {
+					// 	shape_color = "lightgreen";
+					// }
+					buttons[i].addEventListener("click", function () {
+						console.log(this);
+						if (buttons[i].classList.contains("lightgreen")) {
+							shapeColor = "#cce8cc";
+						} else if (buttons[i].classList.contains("lightblue")) {
+							shapeColor = "lightblue";
+						} else if (buttons[i].classList.contains("lightviolet")) {
+							shapeColor = "#e5ccff";
+						} else if (buttons[i].classList.contains("reset")) {
+							shapeColor = "#cce8cc";
+							canvas.innerHTML = "";
+						}
+					});
+				}
+
+				canvas.addEventListener("click", function (e) {
+					// alert(`x ${e.clientX}`);
+					// alert(`y ${e.clientY}`);
+					canvas.innerHTML += `<p style="position: absolute; top: ${e.clientY - 40}px; left: ${
+						e.clientX - 80
+					}px; width: 200px; height: 200px; border-radius:${generateRandomRadius(10, 200)}px; background-color: ${shapeColor}"></p>`;
+				});
+
+				function shrink() {
+					let shapes = document.querySelectorAll("p");
+					for (let i = 0; i < shapes.length; i++) {
+						let previousRadius = shapes[i].style.borderRadius;
+						let newRadius = parseInt(previousRadius) + 10;
+						shapes[i].style.borderRadius = `${newRadius}px`;
+
+						shapes[i].style.height = `${parseInt(shapes[i].style.height) - 10}px`;
+						shapes[i].style.width = `${parseInt(shapes[i].style.width) - 10}px`;
+						if (parseInt(shapes[i].style.height) === 0 && parseInt(shapes[i].style.width) === 0) {
+							shapes[i].remove();
+						}
+						console.log(shapes[i]);
+					}
+				}
+
+				setInterval(() => {
+					// console.log("hi");
+					shrink();
+				}, 1000);
+			});
+		</script>
+	</body>
+</html>
